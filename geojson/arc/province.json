@@ -3,12 +3,11 @@
   "features": [
     {
       "type": "Feature",
+      "id": "torino",
       "properties": {
         "name": "Torino, IT",
         "flows": {
-          "1001": 120,
-          "1002": -45,
-          "1003": 78
+          "firenze": 120
         },
         "centroid": [7.6869, 45.0703, 0]
       },
@@ -29,12 +28,11 @@
     },
     {
       "type": "Feature",
+      "id": "firenze",
       "properties": {
         "name": "Firenze, IT",
         "flows": {
-          "1001": -80,
-          "1004": 33,
-          "1005": 15
+          "torino": -80
         },
         "centroid": [11.2558, 43.7696, 0]
       },
