@@ -113,4 +113,4 @@ def fix_geojson_for_deckgl(data):
 geojson= fix_geojson_for_deckgl(geojson)
 
 with open('italian_cities_flows.json', 'w') as f:
-    json.dump(geojson, f, indent=2)
+    json.dump(geojson, f, indent=1)
