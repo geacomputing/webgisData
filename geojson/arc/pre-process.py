@@ -1,164 +1,78 @@
 import json
+import random
 
-# Sample irregular polygons roughly around city centers
-# Coordinates are [lon, lat], rings closed (first==last)
-italian_cities = [
-    {
-        "name": "Florence",
-        "flows": {str(i): i * 10 for i in range(10)},
-        "centroid": [11.2558, 43.7696, 0],
-        "polygon": [
-            [11.20, 43.80],
-            [11.30, 43.80],
-            [11.35, 43.75],
-            [11.25, 43.70],
-            [11.18, 43.73],
-            [11.20, 43.80],
-        ],
-    },
-    {
-        "name": "Rome",
-        "flows": {str(i): i * 15 for i in range(10)},
-        "centroid": [12.4964, 41.9028, 0],
-        "polygon": [
-            [12.40, 41.95],
-            [12.55, 41.95],
-            [12.60, 41.85],
-            [12.50, 41.80],
-            [12.45, 41.85],
-            [12.40, 41.95],
-        ],
-    },
-    {
-        "name": "Milan",
-        "flows": {str(i): i * 12 for i in range(10)},
-        "centroid": [9.1900, 45.4642, 0],
-        "polygon": [
-            [9.10, 45.50],
-            [9.30, 45.50],
-            [9.35, 45.40],
-            [9.25, 45.35],
-            [9.15, 45.40],
-            [9.10, 45.50],
-        ],
-    },
-    {
-        "name": "Venice",
-        "flows": {str(i): i * 8 for i in range(10)},
-        "centroid": [12.3155, 45.4408, 0],
-        "polygon": [
-            [12.25, 45.50],
-            [12.38, 45.50],
-            [12.40, 45.43],
-            [12.30, 45.40],
-            [12.28, 45.43],
-            [12.25, 45.50],
-        ],
-    },
-    {
-        "name": "Naples",
-        "flows": {str(i): i * 14 for i in range(10)},
-        "centroid": [14.2681, 40.8518, 0],
-        "polygon": [
-            [14.20, 40.90],
-            [14.35, 40.90],
-            [14.38, 40.85],
-            [14.25, 40.80],
-            [14.18, 40.83],
-            [14.20, 40.90],
-        ],
-    },
-    {
-        "name": "Turin",
-        "flows": {str(i): i * 11 for i in range(10)},
-        "centroid": [7.6869, 45.0703, 0],
-        "polygon": [
-            [7.60, 45.12],
-            [7.75, 45.12],
-            [7.78, 45.05],
-            [7.70, 45.00],
-            [7.65, 45.03],
-            [7.60, 45.12],
-        ],
-    },
-    {
-        "name": "Bologna",
-        "flows": {str(i): i * 9 for i in range(10)},
-        "centroid": [11.3426, 44.4949, 0],
-        "polygon": [
-            [11.28, 44.54],
-            [11.40, 44.54],
-            [11.42, 44.48],
-            [11.35, 44.44],
-            [11.30, 44.46],
-            [11.28, 44.54],
-        ],
-    },
-    {
-        "name": "Genoa",
-        "flows": {str(i): i * 13 for i in range(10)},
-        "centroid": [8.9463, 44.4056, 0],
-        "polygon": [
-            [8.85, 44.45],
-            [9.00, 44.45],
-            [9.02, 44.40],
-            [8.90, 44.38],
-            [8.87, 44.40],
-            [8.85, 44.45],
-        ],
-    },
-    {
-        "name": "Palermo",
-        "flows": {str(i): i * 7 for i in range(10)},
-        "centroid": [13.3615, 38.1157, 0],
-        "polygon": [
-            [13.30, 38.16],
-            [13.42, 38.16],
-            [13.45, 38.10],
-            [13.35, 38.05],
-            [13.31, 38.08],
-            [13.30, 38.16],
-        ],
-    },
-    {
-        "name": "Verona",
-        "flows": {str(i): i * 10 for i in range(10)},
-        "centroid": [10.9916, 45.4384, 0],
-        "polygon": [
-            [10.90, 45.48],
-            [11.05, 45.48],
-            [11.08, 45.43],
-            [11.00, 45.40],
-            [10.95, 45.43],
-            [10.90, 45.48],
-        ],
-    },
+def signed_area(coords):
+    area = 0.0
+    n = len(coords)
+    for i in range(n - 1):
+        x1, y1 = coords[i]
+        x2, y2 = coords[i + 1]
+        area += (x1 * y2 - x2 * y1)
+    return area * 3
+
+def ensure_ccw(coords):
+    if signed_area(coords) < 0:
+        coords.reverse()
+    return coords
+
+# List of Italian cities with their coordinates (lon, lat)
+cities = [
+    {"name": "Rome", "coords": [12.4964, 41.9028]},
+    {"name": "Milan", "coords": [9.1900, 45.4642]},
+    {"name": "Naples", "coords": [14.2681, 40.8518]},
+    {"name": "Turin", "coords": [7.6869, 45.0703]},
+    {"name": "Palermo", "coords": [13.3615, 38.1157]},
+    {"name": "Genoa", "coords": [8.9463, 44.4056]},
+    {"name": "Bologna", "coords": [11.3426, 44.4949]},
+    {"name": "Florence", "coords": [11.2558, 43.7696]},
+    {"name": "Venice", "coords": [12.3155, 45.4408]},
+    {"name": "Verona", "coords": [10.9916, 45.4384]}
 ]
 
 features = []
-for city in italian_cities:
-    coords = city["polygon"]
-    if coords[0] != coords[-1]:
-        coords.append(coords[0])
+
+for idx, city in enumerate(cities, start=1):
+    lon, lat = city["coords"]
+    
+    # Create an irregular polygon around city center
+    coords = []
+    num_points = 8
+    for i in range(num_points):
+        angle = i * (360 / num_points) + random.uniform(-15, 15)  # irregular angle offset
+        radius = 0.05 + random.uniform(-0.015, 0.015)             # radius in degrees (~5 km)
+        # Convert angle to radians for trig
+        import math
+        angle_rad = math.radians(angle)
+        x = lon + radius * math.cos(angle_rad)
+        y = lat + radius * math.sin(angle_rad)
+        coords.append([x, y])
+    # Close polygon by repeating the first point
+    coords.append(coords[0])
+
+    # Ensure CCW order
+    coords = ensure_ccw(coords)
+
     feature = {
         "type": "Feature",
         "properties": {
             "name": city["name"],
-            "flows": city["flows"],
-            "centroid": city["centroid"],
+            # Dummy flows with sequential IDs and random values
+            "flows": {str(i): random.randint(-100, 100) for i in range(1, 11)},
+            "centroid": [lon, lat, 0]
         },
         "geometry": {
             "type": "MultiPolygon",
-            "coordinates": [[[coords]]],
-        },
+            "coordinates": [[coords]]  # MultiPolygon with one polygon
+        }
     }
     features.append(feature)
 
 geojson = {
     "type": "FeatureCollection",
-    "features": features,
+    "features": features
 }
 
+# Save to file
 with open("italian_cities.json", "w") as f:
     json.dump(geojson, f, indent=2)
 
