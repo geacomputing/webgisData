@@ -36,7 +36,7 @@ for city in italian_cities:
     polygon_coords = create_irregular_polyline(lon, lat)
 
     # Create a flows dictionary with keys as string sequential IDs and random scalar values
-    flows = {str(i): random.randint(-100, 100) for i in range(1, 6)}  # 5 random flows
+    flows = {str(i): random.randint(-100, 100) for i in range(1, 10)}  # 5 random flows
     
     feature = {
         "type": "Feature",
@@ -58,6 +58,39 @@ geojson = {
 }
 
 print(json.dumps(geojson, indent=2))
+
+
+def ensure_multipolygon_validity(features):
+    """
+    Ensures each MultiPolygon in features:
+    - Has correct nesting
+    - Each linear ring is closed (first point == last point)
+    """
+
+    for feature in features:
+        geom = feature.get('geometry', {})
+        if geom.get('type') == 'MultiPolygon':
+            new_coords = []
+            for polygon in geom['coordinates']:
+                new_polygon = []
+                for ring in polygon:
+                    # Ensure ring is a list of coordinates
+                    if len(ring) == 0:
+                        continue
+                    # Close the ring if not closed
+                    if ring[0] != ring[-1]:
+                        ring = ring + [ring[0]]
+                    new_polygon.append(ring)
+                new_coords.append(new_polygon)
+            # Replace with corrected coordinates
+            feature['geometry']['coordinates'] = new_coords
+
+    return features
+
+
+# Fix MultiPolygon coordinate issues
+geojson['features'] = ensure_multipolygon_validity(geojson['features'])
+
 
 with open('italian_cities_flows.json', 'w') as f:
     json.dump(geojson, f, indent=2)
