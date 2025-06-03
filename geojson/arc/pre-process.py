@@ -1,7 +1,7 @@
 import json
 import random
 
-def create_irregular_polyline(lon, lat, num_points=6, max_offset=0.15):
+def create_irregular_polyline(lon, lat, num_points=10, max_offset=1.15):
     points = []
     angle_step = 360 / num_points
     
