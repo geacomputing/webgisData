@@ -1,0 +1,57 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Torino, IT",
+        "flows": {
+          "1001": 120,
+          "1002": -45,
+          "1003": 78
+        },
+        "centroid": [7.6869, 45.0703, 0]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [7.60, 45.15],
+              [7.77, 45.15],
+              [7.77, 44.99],
+              [7.60, 44.99],
+              [7.60, 45.15]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Firenze, IT",
+        "flows": {
+          "1001": -80,
+          "1004": 33,
+          "1005": 15
+        },
+        "centroid": [11.2558, 43.7696, 0]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [11.20, 43.82],
+              [11.31, 43.82],
+              [11.31, 43.72],
+              [11.20, 43.72],
+              [11.20, 43.82]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
