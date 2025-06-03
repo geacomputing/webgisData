@@ -88,9 +88,29 @@ def ensure_multipolygon_validity(features):
     return features
 
 
-# Fix MultiPolygon coordinate issues
-geojson['features'] = ensure_multipolygon_validity(geojson['features'])
+def fix_geojson_for_deckgl(data):
+    for feature in data.get('features', []):
+        geom = feature.get('geometry', {})
+        if geom.get('type') == 'MultiPolygon':
+            fixed_coords = []
+            for polygon in geom['coordinates']:
+                fixed_polygon = []
+                for ring in polygon:
+                    if not ring:
+                        continue  # skip empty rings
+                    # Remove altitude if present (keep only first 2 coords)
+                    ring_2d = [[pt[0], pt[1]] for pt in ring]
 
+                    # Close ring if not closed
+                    if ring_2d[0] != ring_2d[-1]:
+                        ring_2d.append(ring_2d[0])
+                    fixed_polygon.append(ring_2d)
+                fixed_coords.append(fixed_polygon)
+            feature['geometry']['coordinates'] = fixed_coords
+    return data
+
+
+geojson= fix_geojson_for_deckgl(geojson)
 
 with open('italian_cities_flows.json', 'w') as f:
     json.dump(geojson, f, indent=2)
