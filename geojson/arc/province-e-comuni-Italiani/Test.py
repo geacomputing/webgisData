@@ -62,10 +62,6 @@ df = pd.DataFrame({
     "value": flat_val
 })
 
-
-
-
-
 # Add geometry
 df["coordinates"] = df.apply(lambda row: make_polygon(row["lon"], row["lat"], dx, dy), axis=1)
 df["WaterStress"] = np.random.choice(["apple", "banana", "cherry", "date", "elderberry"])
@@ -199,7 +195,7 @@ tooltip = {
 
 
 
-geojson_url = "https://raw.githubusercontent.com/geacomputing/webgisData/main/geojson/arc/limits_IT_regions.geojson"
+geojson_url = "https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson"
 
 
 geo = gpd.read_file("limits_IT_regions.geojson")
