@@ -4,9 +4,10 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "11",
         "name": "Napoli, Distretto Agricolo 2",
         "flows": {
-          "11": 55, "21": 65, "31": 75, "41": 85, "51": 95, "61": 105
+          "21": 55, "31": 65, "41": 75
         },
         "centroid": [14.2681, 40.8518, 0]
       },
@@ -24,9 +25,10 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "21",
         "name": "Palermo, Distretto Agricolo 3",
         "flows": {
-          "11": 25, "31": 50, "1003": 75, "1004": 100
+          "11": 25, "31": 50
         },
         "centroid": [13.3615, 38.1157, 0]
       },
@@ -38,6 +40,25 @@
           [14.0, 37.5],
           [13.0, 37.5],
           [13.0, 38.5]
+        ]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "31",
+        "name": "Catania, Distretto Agricolo 4",
+        "flows": {},
+        "centroid": [15.0873, 37.5027, 0]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [[[
+          [15.0, 37.8],
+          [15.3, 37.8],
+          [15.3, 37.3],
+          [15.0, 37.3],
+          [15.0, 37.8]
         ]]]
       }
     }
