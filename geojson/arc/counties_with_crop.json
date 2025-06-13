@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Roma, Distretto Agricolo 1",
+        "centroid": [12.4964, 41.9028, 0],
+        "crop": "Wheat",
+        "flows": { "1": 50, "2": -20, "3": 30 }
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [[[
+          [12.0, 42.4], [13.0, 42.4], [13.0, 41.4], [12.0, 41.4], [12.0, 42.4]
+        ]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Milano, Distretto Agricolo 2",
+        "centroid": [9.1900, 45.4642, 0],
+        "crop": "Rice",
+        "flows": { "0": -50, "2": 40, "3": 25 }
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [[[
+          [8.8, 45.8], [9.6, 45.8], [9.6, 45.1], [8.8, 45.1], [8.8, 45.8]
+        ]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Napoli, Distretto Agricolo 3",
+        "centroid": [14.2681, 40.8518, 0],
+        "crop": "Tomatoes",
+        "flows": { "0": 20, "1": -40, "4": 60 }
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [[[
+          [13.8, 41.2], [14.7, 41.2], [14.7, 40.4], [13.8, 40.4], [13.8, 41.2]
+        ]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Palermo, Distretto Agricolo 4",
+        "centroid": [13.3615, 38.1157, 0],
+        "crop": "Citrus",
+        "flows": { "0": -30, "2": -60 }
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [[[
+          [13.0, 38.4], [13.7, 38.4], [13.7, 37.8], [13.0, 37.8], [13.0, 38.4]
+        ]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bari, Distretto Agricolo 5",
+        "centroid": [16.8719, 41.1171, 0],
+        "crop": "Olives",
+        "flows": { "2": -60 }
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [[[
+          [16.5, 41.4], [17.2, 41.4], [17.2, 40.8], [16.5, 40.8], [16.5, 41.4]
+        ]]]
+      }
+    }
+  ]
+}
