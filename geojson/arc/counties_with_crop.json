@@ -7,7 +7,12 @@
         "name": "Roma, Distretto Agricolo 1",
         "centroid": [12.4964, 41.9028, 0],
         "crop": "Wheat",
-        "flows": { "1": 50, "2": -20, "3": 30 }
+        "flows": {
+          "1": 50,
+          "2": 30,
+          "3": 40,
+          "4": 25
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -22,7 +27,12 @@
         "name": "Milano, Distretto Agricolo 2",
         "centroid": [9.1900, 45.4642, 0],
         "crop": "Rice",
-        "flows": { "0": -50, "2": 40, "3": 25 }
+        "flows": {
+          "0": 45,
+          "2": 35,
+          "3": 50,
+          "4": 20
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -37,7 +47,12 @@
         "name": "Napoli, Distretto Agricolo 3",
         "centroid": [14.2681, 40.8518, 0],
         "crop": "Tomatoes",
-        "flows": { "0": 20, "1": -40, "4": 60 }
+        "flows": {
+          "0": 20,
+          "1": 30,
+          "3": 60,
+          "4": 50
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -52,7 +67,12 @@
         "name": "Palermo, Distretto Agricolo 4",
         "centroid": [13.3615, 38.1157, 0],
         "crop": "Citrus",
-        "flows": { "0": -30, "2": -60 }
+        "flows": {
+          "0": 35,
+          "1": 25,
+          "2": 40,
+          "4": 30
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -67,7 +87,12 @@
         "name": "Bari, Distretto Agricolo 5",
         "centroid": [16.8719, 41.1171, 0],
         "crop": "Olives",
-        "flows": { "2": -60 }
+        "flows": {
+          "0": 25,
+          "1": 15,
+          "2": 35,
+          "3": 45
+        }
       },
       "geometry": {
         "type": "MultiPolygon",
