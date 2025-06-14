@@ -4,9 +4,10 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "1",
         "name": "Roma, Distretto Agricolo 1",
         "flows": {
-          "18": 29, "26": 39, "35": 49, "46": 59, "69": 69, "72": 79, "80": 89, "99": 99
+          "2": 75
         },
         "centroid": [12.4964, 41.9028, 0]
       },
@@ -24,9 +25,10 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "2",
         "name": "Bolzano, Distretto Agricolo 1",
         "flows": {
-          "18": 29, "26": 39, "35": 49, "46": 59, "69": 69, "72": 79, "80": 89, "99": 99
+          "1": 45
         },
         "centroid": [11.6566, 46.7153, 0]
       },
